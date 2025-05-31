@@ -1,0 +1,17 @@
+ros2 run <package> <executable>
+rqt_graph
+ros2 topic list
+ros2 topic info <topic_name>
+ros2 interface show <interface_name>
+ros2 service list
+ros2 service type <service_name>
+ros2 interface show <interface_name>
+ros2 service call <service_name> <interface_name> "<request_in_json>"
+ros2 action list
+ros2 action info <action_name> -t
+ros2 action send_goal <action_name> <action_interface> "<goal_in_json>"
+ros2 param list
+ros2 param get <node_name> <param_name>
+ros2 run <package_name> <executable_name> --ros-args -p <param_name>:=value
+ros2 launch <package_name> <launch_file>
+ros2 node list

@@ -1,0 +1,26 @@
+# === ROS 2 build artifacts ===
+build/
+install/
+log/
+
+# === Python artifacts ===
+**/__pycache__/
+**/*.py[cod]
+*.egg-info/
+*.egg
+*.pyo
+*.pyd
+*.pyc
+
+# === CMake and Colcon artifacts ===
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# === Vim swap/backup files ===
+*.swp
+*.swo
+*.bak
+*~
+
