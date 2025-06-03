@@ -15,3 +15,16 @@ ros2 param get <node_name> <param_name>
 ros2 run <package_name> <executable_name> --ros-args -p <param_name>:=value
 ros2 launch <package_name> <launch_file>
 ros2 node list
+ros2 pkg create <pkg_name> --build_type <build_type> --dependencies <list_of_dependencies_separated_with_spaces>
+colcon build
+colcon build --packages-select <package_name> 
+colcon build --packages-select <package_name> --symlink-install (only for python)
+
+#in setup.py
+  entry_points={
+      'console_scripts': [
+          "<executable_name> = <package_name>.<file_name>:<function_name>"
+      ],
+  },
+
+ros2 run <package_name> <executable_name> --ros-args -r __node:=<new_name>
