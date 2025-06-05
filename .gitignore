@@ -1,7 +1,7 @@
 # ROS 2 build artifacts
-/build/
-/install/
-/log/
+**/build/
+**/install/
+**/log/
 
 # Python build artifacts
 *.pyc
