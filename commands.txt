@@ -19,12 +19,5 @@ ros2 pkg create <pkg_name> --build_type <build_type> --dependencies <list_of_dep
 colcon build
 colcon build --packages-select <package_name> 
 colcon build --packages-select <package_name> --symlink-install (only for python)
-
-#in setup.py
-  entry_points={
-      'console_scripts': [
-          "<executable_name> = <package_name>.<file_name>:<function_name>"
-      ],
-  },
-
 ros2 run <package_name> <executable_name> --ros-args -r __node:=<new_name>
+ros2 topic echo <topic_name>
