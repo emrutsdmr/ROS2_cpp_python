@@ -20,4 +20,9 @@ colcon build
 colcon build --packages-select <package_name> 
 colcon build --packages-select <package_name> --symlink-install (only for python)
 ros2 run <package_name> <executable_name> --ros-args -r __node:=<new_name>
+ros2 run <package_name> <executable_name> --ros-args -r <topic_name>:=<new_topic_name>
+ros2 run my_py_pkg number_publisher --ros-args -r __node:=number_publisher_2 -r number:=my_number
 ros2 topic echo <topic_name>
+ros2 topic pub -r <frequency> <topic_name> <interface> <message_in_json>
+ros2 bag record <list of topics> -o <bag_name>
+ros2 bag play <path_to_bag>
