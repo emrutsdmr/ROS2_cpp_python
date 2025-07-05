@@ -29,3 +29,8 @@ ros2 bag record <list of topics> -o <bag_name>
 ros2 bag play <path_to_bag>
 ros2 topic list --include-hidden-topics
 ros2 service list --include-hidden-services
+ros2 run <package_name> <executable_name> --ros-args --params-file <yaml file path>
+ros2 run <package_name> <executable_name> --ros-args -r __node:=<node name in yaml file> --params-file <yaml file path>
+ros2 param dump <node_name>
+ros2 param set <node_name> <param_name> <new_value>
+ros2 param load <node_name> <yaml_file>
