@@ -25,7 +25,8 @@ setup(
             "number_counter = my_py_pkg.number_counter:main",
             "reset_counter_client = my_py_pkg.reset_counter_client:main",
             "count_until_server = my_py_pkg.count_until_server:main",
-            "count_until_client = my_py_pkg.count_until_client:main"
+            "count_until_client = my_py_pkg.count_until_client:main",
+            "turtle_controller = my_py_pkg.turtle_controller:main"
         ],
     },
 )
