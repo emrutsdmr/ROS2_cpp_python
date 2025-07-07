@@ -11,6 +11,8 @@ find_package(rclcpp REQUIRED)
 find_package(example_interfaces REQUIRED)
 find_package(my_robot_interfaces REQUIRED)
 find_package(rclcpp_action REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(turtlesim REQUIRED)
 
 add_executable(test_node src/my_first_node.cpp)
 ament_target_dependencies(test_node rclcpp)
@@ -30,6 +32,9 @@ ament_target_dependencies(count_until_server rclcpp rclcpp_action my_robot_inter
 add_executable(count_until_client src/count_until_client.cpp)
 ament_target_dependencies(count_until_client rclcpp rclcpp_action my_robot_interfaces)
 
+add_executable(turtle_controller src/turtle_controller.cpp)
+ament_target_dependencies(turtle_controller rclcpp geometry_msgs turtlesim)
+
 install(TARGETS
   test_node
   number_publisher
@@ -37,6 +42,7 @@ install(TARGETS
   reset_counter_client
   count_until_server
   count_until_client
+  turtle_controller
   DESTINATION lib/${PROJECT_NAME}/
 )
 
