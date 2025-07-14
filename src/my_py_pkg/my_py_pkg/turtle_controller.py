@@ -6,9 +6,17 @@ from turtlesim.msg import Pose
 from turtlesim.srv import SetPen
 from my_robot_interfaces.srv import ActivateTurtle
 
+
 class TurtleControllerNode(Node):
   def __init__(self):
     super().__init__("turtle_controller")
+    self.declare_parameter("color_1", [255, 0, 0])
+    self.declare_parameter("color_2", [0, 255, 0])
+    self.declare_parameter("turtle_velocity", 1.0)
+    self.color_1_ = self.get_parameter("color_1").value
+    self.color_2_ = self.get_parameter("color_2").value
+    self.turtle_velocity_ = self.get_parameter("turtle_velocity").value
+
     self.is_active_ = True
     self.previous_x_ = 0.0
     self.set_pen_client_ = self.create_client(SetPen, "/turtle1/set_pen")
@@ -20,21 +28,21 @@ class TurtleControllerNode(Node):
     if self.is_active_:
       cmd = Twist()
       if pose.x < 5.5:
-        cmd.linear.x = 1.0
-        cmd.angular.z = 1.0
+        cmd.linear.x = self.turtle_velocity_
+        cmd.angular.z = self.turtle_velocity_
       else:
-        cmd.linear.x = 2.0
-        cmd.angular.z = 2.0
+        cmd.linear.x = self.turtle_velocity_ * 2.0
+        cmd.angular.z = self.turtle_velocity_ * 2.0
       self.cmd_vel_pub_.publish(cmd)
 
       if pose.x > 5.5 and self.previous_x_ <= 5.5:
         self.previous_x_ = pose.x
-        self.get_logger().info("Set color to red.")
-        self.call_set_pen(255, 0, 0)
+        self.get_logger().info("Set color 1.")
+        self.call_set_pen(self.color_1_[0], self.color_1_[1], self.color_1_[2])
       elif pose.x <= 5.5 and self.previous_x_ > 5.5:
         self.previous_x_ = pose.x
-        self.get_logger().info("Set color to green.")
-        self.call_set_pen(0, 255, 0)
+        self.get_logger().info("Set color 2.")
+        self.call_set_pen(self.color_2_[0], self.color_2_[1], self.color_2_[2])
 
   def call_set_pen(self, r, g, b):
     while not self.set_pen_client_.wait_for_service(1.0):
@@ -57,11 +65,14 @@ class TurtleControllerNode(Node):
       response.message = "Stopping the turtle"
     return response
 
+
 def main(args=None):
   rclpy.init(args=args)
   node = TurtleControllerNode()
   rclpy.spin(node)
   rclpy.shutdown()
 
+
 if __name__ == "__main__":
   main()
+
